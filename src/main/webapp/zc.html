@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>注册</title>
+<style type="text/css">
+#btn{
+background-color: #921AFF;
+color: white;
+border:0px;
+border-radius: 2px;
+width:200px;
+height:30px;
+
+}
+#t{
+width:100px;
+background-color: #9D9D9D;
+color: white;
+display:inline-block;
+text-align: center;
+height:25px;
+margin: 0px 8px;
+padding-top: 3px;
+}
+body{
+margin: 0px 0px;
+}
+tr{
+height:50px;
+}
+#d1{
+width:100%px;
+height:100px;
+background-color:#921AFF;
+color:white;
+overflow: hidden;
+text-align: center;
+}
+#d11{
+float: left;
+margin-top: 30px;
+margin-left: 500px;
+}
+#d12{
+float: left;
+margin-top: 50px;
+margin-left: 50px;
+}
+#size{
+font-size: 22px;
+text-align: left;
+border-left: 8px solid #921AFF;
+padding-left: 8px;
+}
+#d2{
+margin-left: 30%;
+background-color: white;
+width: 1000px;
+margin-top: 2%;
+}
+#t2,#t3,#g2,#g3{
+margin-left: 20px;
+}
+select{
+width:200px;
+}
+#q1{
+height: 40px;
+border-left: 8px solid #921AFF;
+padding-left: 8px;
+}
+
+</style>
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript">
+/*$(function(){
+	$("#r").hide();
+	$("input[id='t1']").click(function(){
+		for(var i=1980;i<2001;i++){
+			var option=$("<option>"+i+"</option>");
+			$("#r").append(option);
+		}
+		$("#r").show();
+	})
+	
+})*/
+var code;
+
+function createcode(){
+	code="";
+	var codeLength=4;
+	var random=new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R', 'S','T','U','V','W','X','Y','Z');
+	for(var i=0;i<codeLength;i++){
+	var index=Math.floor(Math.random()*36);
+	code+=random[index];
+	$("#t").text(code);
+	}
+	$("#t").css("display","block-inline");
+}
+$(function(){
+	$("#s").siblings().hide();
+	$("#p").siblings().hide();
+	var code;
+	var colorx1;
+	var colorx2;
+	var upper;
+	function xym(){
+		if($("#y").val()==$("#t").text()){
+			return upper=true;
+		}else{
+			return upper=false;
+		}
+	}
+	function createcode(){
+		code="";
+		var codeLength=4;
+		var random=new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R', 'S','T','U','V','W','X','Y','Z');
+		for(var i=0;i<codeLength;i++){
+		var index=Math.floor(Math.random()*36);
+		code+=random[index];
+		$("#t").text(code);
+		}
+		$("#t").css("display","block-inline");
+	}
+	$("#s").change(function(){
+		var x=$("#s").val();
+		var reg=/^[\d]{11}$/;
+		if(reg.test(x)){
+			$("#s").siblings().show();
+			$("#s").siblings().css("color","#00EC00");
+			return colorx1=true;
+			
+		}else{
+			$("#s").siblings().show();
+			$("#s").siblings().css("color","red");
+			return colorx1=false;
+		}
+	})
+		$("#p").change(function(){
+		var x=$("#p").val();
+		var reg=/^[\d]{6,12}$/;
+		if(reg.test(x)){
+			$("#p").siblings().show();
+			$("#p").siblings().css("color","#00EC00");
+			return colorx2=true;
+		}else{
+			$("#p").siblings().show();
+			$("#p").siblings().css("color","red");
+			return colorx2=false;
+		}
+	})
+	$("#btn").click(function(){
+		xym();
+		if($("input[name='gender']:checked").val()!=null&$("input[name='hh']:checked").val()!=null&
+		$("select option:selected").val()!="请选择"&colorx1&colorx2&upper&$("input[name='fuwu']:checked").val()
+		!=null&$("#t1").val()!=""&$("#t2").val()!=""&$("#t3").val()!=""&
+		$("#g1").val()!=""&$("#g2").val()!=""&$("#g3").val()!=""){
+			alert("可以");
+		}else{
+			alert("不可以");
+		}
+		
+	})
+	/*身高*/
+	function select1(){
+		var option=$("<option>"+"请选择"+"</option>");
+		$("#sel1").append(option);
+		for(var i=130;i<=185;i+=5){
+			option=$("<option>"+i+"~"+(i+5)+"cm"+"</option>");
+	$("#sel1").append(option);
+		}
+		 option=$("<option>"+"190cm以上"+"</option>");
+		$("#sel1").append(option);
+	}
+	/*学历*/
+	function select2(){
+		var option=$("<option>"+"请选择"+"</option>");
+		$("#sel2").append(option);
+		var x=['小学','初中','高中','中专','专科','本科','硕士','博士'];
+		for(var i=0;i<x.length;i++){
+		 option=$("<option>"+x[i]+"</option>");
+		$("#sel2").append(option);
+		}
+	}
+	/*月工资*/
+	function select3(){
+		var option=$("<option>"+"请选择"+"</option>");
+		$("#sel3").append(option);
+		for(var i=3000;i<30000;i+=3000){
+			option=$("<option>"+i+"~"+(i+2000)+"</option>");
+			$("#sel3").append(option);
+		}
+		var option=$("<option>"+"3万以上"+"</option>");
+		$("#sel3").append(option);
+	}
+	
+	select1();
+	select2();
+	select3();
+	
+	createcode();
+})
+</script>
+</head>
+<body>
+<header id="d1">
+<div id="d11">情缘网
+<div >qingyuan.com</div>
+</div>
+<div id="d12">每一个人都有一段大话西游</div>
+</header>
+<div id="d2">
+<table >
+<caption id="size" >编辑征婚资料</caption>
+<tr>
+<td width="200px">我是一位</td><td><input type="radio" name="gender" value="nan" >男士
+<input type="radio" name="gender" value="nv" >女士</td>
+</tr>
+<tr>
+<td>我的生日</td><td ><input type="text" placeholder="年"  id="t1"><input type="text" placeholder="月"  id="t2"><input type="text" placeholder="日"  id="t3">
+</td>
+</tr>
+<tr>
+<td>工作地区</td><td ><input type="text" placeholder="省/直辖市"  id="g1"><input type="text" placeholder="市/区"  id="g2"><input type="text" placeholder="区/县"  id="g3">
+</td>
+</tr>
+<tr>
+<td>婚姻状态</td><td><input type="radio" name="hh" value="weihun">未婚<input type="radio" name="hh" value="lihun">离婚<input type="radio" name="hh" value="sangou">丧偶</td>
+</tr>
+<tr>
+<td>我的身高</td><td><select id="sel1">
+
+</select></td>
+</tr>
+<tr>
+<td>我的学历</td><td><select id="sel2">
+
+</select></td>
+</tr>
+<tr>
+<td>我的月收入</td><td><select id="sel3">
+
+</select></td>
+</tr>
+<tr >
+<td id="q1">注册账户</td><td>今天有13251351位会员加入情缘网</td>
+</tr>
+</tr>
+<tr >
+<td >我的手机</td><td><input type="text" placeholder="输入手机号码"  id="s"><span>输入正确值</span></td>
+</tr>
+<tr >
+<td >创建密码</td><td><input type="password" placeholder="设置登录密码（6-12位）" id="p"><span>输入正确的密码</span></td>
+</tr>
+<tr>
+<td>校验码</td><td><input type="text" placeholder="输入验证码" id="y"><span id="t"></span><a href="javascript:createcode();">看不清？点这里</a></td>
+</tr>
+<tr>
+<td></td><td><input type="checkbox" name="fuwu">已阅读和同意情缘网的<a href='fw.html'>服务条款</a>和<a href='xx.html'>信息保护政策</a>并同意将本人提供之信息已由情缘网提供线上/线下服务使用</td>
+</tr>
+<tr>
+<td></td><td><input type="button" value="免费注册，开启情缘之旅" id="btn"></td>
+</tr>
+</table>
+
+</div>
+</body>
+</html>
